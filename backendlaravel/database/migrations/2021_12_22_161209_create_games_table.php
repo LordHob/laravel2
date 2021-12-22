@@ -16,9 +16,9 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
 
             $table->increments('id');
-            $table->string('name', 50);
-            $table->string('company', 50);
-            $table->string('description', 100);
+            $table->string('nombre', 80);
+            $table->string('compania', 100);
+            $table->string('descripcion', 200);
             $table->timestamps();
         });
     }

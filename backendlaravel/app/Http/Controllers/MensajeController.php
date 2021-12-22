@@ -4,25 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use App\Models\Message;
+use App\Models\Mensaje;
 
-class MessageController extends Controller
+class MensajeController extends Controller
 {
     //crear los mensajes
-    public function createMessage(Request $request)
+    public function createMensaje(Request $request)
     {
 
-        $idUser = $request->input('idUser');
-        $idParty = $request->input('idParty');
-        $message = $request->input('message');
+        $idusuario = $request->input('idusuario');
+        $idparty = $request->input('idparty');
+        $mensaje = $request->input('mensaje');
+
+
 
         try {
 
-            return Message::create(
+            return Mensaje::create(
                 [
-                    'idUser' => $idUser,
-                    'idParty' => $idParty,
-                    'message' => $message,
+                    'idusuario' => $idusuario,
+                    'idparty' => $idparty,
+                    'mensaje' => $mensaje,
 
                 ]
             );
@@ -36,14 +38,14 @@ class MessageController extends Controller
         }
     }
     //ver los mensajes por la id
-    public function MessagebyID($id)
+    public function MensajebyID($id)
     {
 
 
         try {
-            $Message = Message::all()
+            $Mensaje = Mensaje::all()
                 ->where('id', "=", $id);
-            return $Message;
+            return $Mensaje;
         } catch (QueryException $error) {
 
             $codigoError = $error->errorInfo[1];
@@ -52,24 +54,24 @@ class MessageController extends Controller
             }
         }
     }
-    public function deleteMessage($id)
+    public function deleteMensaje($id)
     {
 
         try {
-            $arrayMessage = Message::all()
+            $arrayMensaje = Mensaje::all()
                 ->where('id', '=', $id);
 
-            $Message = Message::where('id', '=', $id);
+            $Mensaje = Mensaje::where('id', '=', $id);
 
-            if (count($arrayMessage) == 0) {
+            if (count($arrayMensaje) == 0) {
                 return response()->json([
-                    "data" => $arrayMessage,
+                    "data" => $arrayMensaje,
                     "message" => "No se ha encontrado el Mensaje"
                 ]);
             } else {
-                $Message->delete();
+                $Mensaje->delete();
                 return response()->json([
-                    "data" => $arrayMessage,
+                    "data" => $arrayMensaje,
                     "message" => "Mensaje borrado correctamente"
                 ]);
             }
@@ -81,12 +83,12 @@ class MessageController extends Controller
             }
         }
     }
-    public function showAllMessage()
+    public function showAllMensaje()
     {
 
         try {
 
-            return Message::all();
+            return Mensaje::all();
         } catch (QueryException $error) {
             return $error;
         }

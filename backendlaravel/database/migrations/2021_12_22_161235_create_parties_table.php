@@ -16,11 +16,12 @@ class CreatePartiesTable extends Migration
         Schema::create('parties', function (Blueprint $table) {
 
             $table->increments('id');
-            $table->string('name', 50);
+            $table->string('nombre', 100);
+            // $table->string('idusuario',100);
 
             //////Esto es para conectar con la id de games///
-            $table->unsignedInteger('idGame');
-            $table->foreign('idGame')
+            $table->unsignedInteger('idgame');
+            $table->foreign('idgame')
                 ->references('id')
                 ->on('games')
                 ->unsigned()
@@ -29,8 +30,8 @@ class CreatePartiesTable extends Migration
                 ->onDelete('cascade');
 
             ////////Esto es para conectar con la id de usuarios////
-            $table->unsignedInteger('idUser');
-            $table->foreign('idUser')
+            $table->unsignedInteger('idusuario');
+            $table->foreign('idusuario')
                 ->references('id')
                 ->on('users')
                 ->unsigned()

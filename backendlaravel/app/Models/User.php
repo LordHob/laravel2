@@ -4,13 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
-class User extends Model
+class User extends Authenticatable
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
+
 
     protected $fillable = [
-        'email', 'userName', 'password', 'role', 'steamUserName'
+        'email', 'nombre', 'password', 'role', 'tipo', 'raza', 'edad', 'localidad'
 
     ];
 
@@ -18,8 +22,8 @@ class User extends Model
     {
         return $this->hasMany(Party::class);
     }
-    public function messages()
+    public function mensajes()
     {
-        return $this->hasMany(Message::class);
+        return $this->hasMany(Mensaje::class);
     }
 }

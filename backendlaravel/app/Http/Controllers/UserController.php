@@ -9,7 +9,7 @@ use App\Models\User;
 class UserController extends Controller
 {
     //
-    public function showAllUser()
+    public function showAllUsuario()
     {
 
         try {
@@ -20,24 +20,30 @@ class UserController extends Controller
         }
     }
     ////////////////Crear Usuarios////////////////
-    public function addUsers(Request $request)
+    public function addUsuarios(Request $request)
     { //sin id y sin fecha
 
         $email = $request->input('email');
-        $userName = $request->input('userName');
+        $nombre = $request->input('nombre');
         $password = $request->input('password');
         $role = $request->input('role');
-        $steamUserName = $request->input('steamUserName');
+        $tipo = $request->input('tipo');
+        $raza = $request->input('raza');
+        $edad = $request->input('edad');
+        $localidad = $request->input('localidad');
 
         try {
 
             return User::create(
                 [
                     'email' => $email,
-                    'userName' => $userName,
-                    'password' => $password,
+                    'nombre' => $nombre,
                     'role' => $role,
-                    'steamUserName' => $steamUserName,
+                    'password' => $password,
+                    'tipo' => $tipo,
+                    'raza' => $raza,
+                    'edad' => $edad,
+                    'localidad' => $localidad,
                 ]
             );
         } catch (QueryException $error) {
@@ -50,24 +56,31 @@ class UserController extends Controller
         }
     }
     ////////////////Modificar Usuarios////////////////
-    public function UpdateUsers(Request $request, $id)
+    public function UpdateUsuarios(Request $request, $id)
     {
 
 
         $email = $request->input('email');
-        $userName = $request->input('userName');
+        $nombre = $request->input('nombre');
         $password = $request->input('password');
-        $steamUserName = $request->input('steamUserName');
+        $tipo = $request->input('tipo');
+        $raza = $request->input('raza');
+        $edad = $request->input('edad');
+        $localidad = $request->input('localidad');
+
 
         try {
 
-            $User = User::where('id', '=', $id)
+            $Usuario = User::where('id', '=', $id)
                 ->update(
                     [
                         'email' => $email,
-                        'userName' => $userName,
+                        'nombre' => $nombre,
                         'password' => $password,
-                        'steamUserName' => $steamUserName,
+                        'tipo' => $tipo,
+                        'raza' => $raza,
+                        'edad' => $edad,
+                        'localidad' => $localidad,
                     ]
                 );
             return User::all()
@@ -81,13 +94,14 @@ class UserController extends Controller
     }
     //Busqueda por la ID de Usuarios //
 
-    public function UsersByID($id)
+    public function UsuariosByID($id)
     {
 
+
         try {
-            $User = User::all()
+            $Usuario = User::all()
                 ->where('id', "=", $id);
-            return $User;
+            return $Usuario;
         } catch (QueryException $error) {
 
             $codigoError = $error->errorInfo[1];
@@ -98,24 +112,26 @@ class UserController extends Controller
     }
 
     //Borrar los Usuarios //
-    public function DeleteUsers($id)
+    public function DeleteUsuarios($id)
     {
 
+
+
         try {
-            $arrayUser = User::all()
+            $arrayUsuario = User::all()
                 ->where('id', '=', $id);
 
-            $User = User::where('id', '=', $id);
+            $Usuario = User::where('id', '=', $id);
 
-            if (count($arrayUser) == 0) {
+            if (count($arrayUsuario) == 0) {
                 return response()->json([
-                    "data" => $arrayUser,
-                    "message" => "No se ha encontrado el usuario"
+                    "data" => $arrayUsuario,
+                    "message" => "No se ha encontrado el Usuario"
                 ]);
             } else {
-                $User->delete();
+                $Usuario->delete();
                 return response()->json([
-                    "data" => $arrayUser,
+                    "data" => $arrayUsuario,
                     "message" => "Usuario borrado correctamente"
                 ]);
             }

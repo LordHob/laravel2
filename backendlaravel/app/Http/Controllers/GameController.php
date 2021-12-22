@@ -13,18 +13,18 @@ class GameController extends Controller
     public function createGame(Request $request)
     {
 
-        $name = $request->input('name');
-        $company = $request->input('company');
-        $description = $request->input('description');
+        $nombre = $request->input('nombre');
+        $compania = $request->input('compania');
+        $descripcion = $request->input('descripcion');
 
 
         try {
 
             return Game::create(
                 [
-                    'name' => $name,
-                    'company' => $company,
-                    'description' => $description,
+                    'nombre' => $nombre,
+                    'compania' => $compania,
+                    'descripcion' => $descripcion,
 
                 ]
             );
@@ -71,9 +71,12 @@ class GameController extends Controller
     public function updateGame(Request $request, $id)
     {
 
-        $name = $request->input('name');
-        $company = $request->input('company');
-        $description = $request->input('description');
+
+
+        $nombre = $request->input('nombre');
+        $compania = $request->input('compania');
+        $descripcion = $request->input('descripcion');
+
 
 
         try {
@@ -81,9 +84,9 @@ class GameController extends Controller
             $Game = Game::where('id', '=', $id)
                 ->update(
                     [
-                        'name' => $name,
-                        'company' => $company,
-                        'description' => $description,
+                        'nombre' => $nombre,
+                        'compania' => $compania,
+                        'descripcion' => $descripcion,
 
                     ]
                 );

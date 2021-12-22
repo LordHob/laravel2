@@ -10,21 +10,22 @@ class PartyController extends Controller
 
 {
     //
-    public function newparty(Request $request)
+    public function nuevaparty(Request $request)
     {
 
 
-        $name = $request->input('name');
-        $idUser = $request->input('idUser');
-        $idGame = $request->input('idGame');
+        $nombre = $request->input('nombre');
+        $idusuario = $request->input('idusuario');
+        $idgame = $request->input('idgame');
+
 
         try {
 
             return Party::create(
                 [
-                    'name' => $name,
-                    'idUser' => $idUser,
-                    'idGame' => $idGame,
+                    'nombre' => $nombre,
+                    'idusuario' => $idusuario,
+                    'idgame' => $idgame,
                 ]
             );
         } catch (QueryException $error) {
@@ -95,18 +96,22 @@ class PartyController extends Controller
     public function Updateteparty(Request $request, $id)
     {
 
-        $name = $request->input('name');
-        $idUser = $request->input('idUser');
-        $idGame = $request->input('idGame');
+
+
+        $nombre = $request->input('nombre');
+        $idusuario = $request->input('idusuario');
+        $idgame = $request->input('idgame');
+
+
 
         try {
 
             $Party = Party::where('id', '=', $id)
                 ->update(
                     [
-                        'name' => $name,
-                        'idUser' => $idUser,
-                        'idGame' => $idGame,
+                        'nombre' => $nombre,
+                        'idusuario' => $idusuario,
+                        'idgame' => $idgame,
 
                     ]
                 );
