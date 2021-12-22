@@ -11,13 +11,10 @@ use Laravel\Passport\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
-
+    
     protected $fillable = [
         'email', 'nombre', 'password', 'role', 'tipo', 'raza', 'edad', 'localidad'
-
     ];
-
     public function parties()
     {
         return $this->hasMany(Party::class);
